@@ -16,28 +16,28 @@ It replaced a manual routine of collecting spreadsheets, cleaning customer names
 ## How it fits together
 
 ```mermaid
-flowchart LR
-    subgraph Daily["Daily schedule (09:00)"]
-        A[Sales exports<br/>.xlsx] --> B[Sort by<br/>business unit]
-        B --> C[Python report<br/>builder]
-        C --> D{Unresolved<br/>names?}
-        D -- yes --> E[Email: link to<br/>resolver page]
-        C --> F[Email the<br/>latest report]
+flowchart TD
+    subgraph Daily["Daily schedule, 09:00"]
+        A["Sales exports (.xlsx)"] --> B["Sort by business unit"]
+        B --> C["Python report builder"]
+        C --> D{"Unresolved names?"}
+        D -->|yes| E["Email a link to the resolver page"]
+        C --> F["Email the latest report"]
     end
 
-    C -- writes --> R[(Reports folder)]
-    C -- writes --> S[(Name map &<br/>pending items)]
+    C -->|writes| R[("Reports folder")]
+    C -->|writes| S[("Name map and pending items")]
 
     subgraph Resolver["Missing Names Resolver"]
-        P[Web page] <--> API[State & action<br/>webhooks]
+        P["Web page"] <--> API["State and action webhooks"]
     end
     E -.-> P
     API <--> S
 
     subgraph WA["WhatsApp Report Bot"]
-        W[WhatsApp message] --> X{Registered &<br/>asked for report?}
-        X -- yes --> Y[Send file on WhatsApp<br/>+ by email]
-        X -- no --> Z[Polite reply]
+        W["WhatsApp message"] --> X{"Registered and asked for report?"}
+        X -->|yes| Y["Send file on WhatsApp and by email"]
+        X -->|no| Z["Polite reply"]
     end
     R --> Y
 ```

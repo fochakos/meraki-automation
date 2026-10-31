@@ -1,0 +1,23 @@
+# Secrets
+.env
+*.key
+credentials*.json
+
+# Company data and generated output
+*.xlsx
+*.xls
+*.csv
+whatsapp_contacts.json
+reports/
+input/
+flags/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

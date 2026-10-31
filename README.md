@@ -16,7 +16,7 @@ It replaced a manual routine of collecting spreadsheets, cleaning customer names
 ## How it fits together
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph Daily["Daily schedule, 09:00"]
         A["Sales exports (.xlsx)"] --> B["Sort by business unit"]
         B --> C["Python report builder"]
